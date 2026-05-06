@@ -1,4 +1,4 @@
-package com.example.tooltip.ui.theme
+package com.example.tooltip.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

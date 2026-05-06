@@ -1,4 +1,4 @@
-package com.example.tooltip.ui.theme
+package com.example.tooltip.core.theme
 
 import androidx.compose.ui.graphics.Color
 
