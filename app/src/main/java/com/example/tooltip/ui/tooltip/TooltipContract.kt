@@ -1,7 +1,7 @@
 package com.example.tooltip.ui.tooltip
 
-import com.example.tooltip.data.model.TooltipItem
-import com.example.tooltip.data.model.TooltipResponse
+import com.assignment.tooltip.data.model.TooltipItem
+import com.assignment.tooltip.data.model.TooltipResponse
 
 data class TooltipState(
     val isLoading: Boolean = false,
