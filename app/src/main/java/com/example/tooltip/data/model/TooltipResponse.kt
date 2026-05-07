@@ -1,4 +1,4 @@
-package com.example.tooltip.data.model
+package com.assignment.tooltip.data.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -26,6 +26,8 @@ data class TooltipItem(
     @SerializedName("enableBackdrop") val enableBackdrop: Boolean?,
     @SerializedName("styling") val styling: TooltipStyling?
 )
+
+// --- Deep dive into the styling configuration ---
 
 data class TooltipStyling(
     @SerializedName("appearance") val appearance: Appearance?,
