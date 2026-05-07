@@ -3,45 +3,45 @@ package com.example.tooltip
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.tooltip.core.theme.ToolTipTheme
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.tooltip.data.repository.TooltipRepositoryImpl
+import com.example.tooltip.domain.usecase.GetTooltipDataUseCase
+import com.example.tooltip.ui.dashboard.DashboardScreen
+import com.example.tooltip.ui.tooltip.TooltipViewModel
+import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ToolTipTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+    private val viewModel: TooltipViewModel by viewModels {
+        object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                val gson = Gson()
+                val repository = TooltipRepositoryImpl(gson)
+                val useCase = GetTooltipDataUseCase(repository)
+                return TooltipViewModel(useCase) as T
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ToolTipTheme {
-        Greeting("Android")
+        setContent {
+            MaterialTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    DashboardScreen(viewModel = viewModel)
+                }
+            }
+        }
     }
 }
