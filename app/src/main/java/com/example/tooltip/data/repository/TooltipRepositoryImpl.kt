@@ -1,7 +1,7 @@
 package com.example.tooltip.data.repository
 
+import com.assignment.tooltip.data.model.TooltipResponse
 import com.example.tooltip.core.network.NetworkResult
-import com.example.tooltip.data.model.TooltipResponse
 import com.example.tooltip.domain.repository.TooltipRepository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ class TooltipRepositoryImpl(
 
                 NetworkResult.Success(parsedData)
             } catch (e: Exception) {
-                NetworkResult.UnknownError // Using your custom NetworkResult error type
+                NetworkResult.UnknownError
             }
         }
     }

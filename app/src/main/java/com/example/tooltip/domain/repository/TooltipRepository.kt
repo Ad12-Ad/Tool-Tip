@@ -1,7 +1,7 @@
 package com.example.tooltip.domain.repository
 
+import com.assignment.tooltip.data.model.TooltipResponse
 import com.example.tooltip.core.network.NetworkResult
-import com.example.tooltip.data.model.TooltipResponse
 
 interface TooltipRepository {
     /**
